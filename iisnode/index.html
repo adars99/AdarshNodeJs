@@ -1,0 +1,87 @@
+<html>
+<head>
+    <title>iisnode logs</title>
+    <style type="text/css">
+        body
+        {
+            font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        }
+        table
+        {
+            border-collapse: collapse;
+        }
+        td, th
+        {
+            border: 1px solid lightgray;
+            padding: 3px 7px 2px 7px;
+        }
+        th
+        {
+            text-align: left;
+            padding-top: 5px;
+            padding-bottom: 4px;
+            background-color: Gray;
+            color: #ffffff;
+        }
+        td.stderr
+        {
+            color: Red;
+        }
+    </style>
+</head>
+<body>
+    <table id="logFilesTable">
+        <tr>
+            <th>
+                Computer name
+            </th>
+            <th>
+                PID
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Created
+            </th>
+            <th>
+                Link
+            </th>
+        </tr>
+    </table>
+    <p id="lastUpdated"></p>
+    <script type="text/javascript">
+
+        // this is replaced with actual data at runtime by code in interceptor.js
+        var logFiles = [{"file":"W7AKUMAT45-10528-stderr-1442359981137.txt","computername":"W7AKUMAT45","pid":10528,"type":"stderr","created":1442359981137},{"file":"W7AKUMAT45-10528-stdout-1442359981132.txt","computername":"W7AKUMAT45","pid":10528,"type":"stdout","created":1442359981132},{"file":"W7AKUMAT45-10668-stderr-1442359340900.txt","computername":"W7AKUMAT45","pid":10668,"type":"stderr","created":1442359340900},{"file":"W7AKUMAT45-12328-stderr-1442359441835.txt","computername":"W7AKUMAT45","pid":12328,"type":"stderr","created":1442359441835},{"file":"W7AKUMAT45-13100-stderr-1442359332864.txt","computername":"W7AKUMAT45","pid":13100,"type":"stderr","created":1442359332864},{"file":"W7AKUMAT45-13384-stderr-1442359572173.txt","computername":"W7AKUMAT45","pid":13384,"type":"stderr","created":1442359572173},{"file":"W7AKUMAT45-13384-stdout-1442359572168.txt","computername":"W7AKUMAT45","pid":13384,"type":"stdout","created":1442359572168},{"file":"W7AKUMAT45-13436-stderr-1442359540158.txt","computername":"W7AKUMAT45","pid":13436,"type":"stderr","created":1442359540158},{"file":"W7AKUMAT45-13436-stdout-1442359540151.txt","computername":"W7AKUMAT45","pid":13436,"type":"stdout","created":1442359540151},{"file":"W7AKUMAT45-13688-stderr-1442359596449.txt","computername":"W7AKUMAT45","pid":13688,"type":"stderr","created":1442359596449},{"file":"W7AKUMAT45-13688-stderr-1442359951968.txt","computername":"W7AKUMAT45","pid":13688,"type":"stderr","created":1442359951968},{"file":"W7AKUMAT45-13688-stdout-1442359596444.txt","computername":"W7AKUMAT45","pid":13688,"type":"stdout","created":1442359596444},{"file":"W7AKUMAT45-13688-stdout-1442359951963.txt","computername":"W7AKUMAT45","pid":13688,"type":"stdout","created":1442359951963},{"file":"W7AKUMAT45-14072-stderr-1442359421022.txt","computername":"W7AKUMAT45","pid":14072,"type":"stderr","created":1442359421022},{"file":"W7AKUMAT45-14404-stderr-1442359923563.txt","computername":"W7AKUMAT45","pid":14404,"type":"stderr","created":1442359923563},{"file":"W7AKUMAT45-14404-stdout-1442359923558.txt","computername":"W7AKUMAT45","pid":14404,"type":"stdout","created":1442359923558},{"file":"W7AKUMAT45-14684-stderr-1442359334372.txt","computername":"W7AKUMAT45","pid":14684,"type":"stderr","created":1442359334372},{"file":"W7AKUMAT45-3452-stderr-1442359337080.txt","computername":"W7AKUMAT45","pid":3452,"type":"stderr","created":1442359337080},{"file":"W7AKUMAT45-8152-stderr-1442359864767.txt","computername":"W7AKUMAT45","pid":8152,"type":"stderr","created":1442359864767},{"file":"W7AKUMAT45-8152-stdout-1442359864762.txt","computername":"W7AKUMAT45","pid":8152,"type":"stdout","created":1442359864762},{"file":"W7AKUMAT45-8632-stderr-1442359456220.txt","computername":"W7AKUMAT45","pid":8632,"type":"stderr","created":1442359456220},{"file":"W7AKUMAT45-8632-stdout-1442359456213.txt","computername":"W7AKUMAT45","pid":8632,"type":"stdout","created":1442359456213}];
+        var lastUpdated = 1442359981979;
+        var date = new Date();
+
+        date.setTime(lastUpdated);
+        document.getElementById('lastUpdated').innerHTML = 'Index was last updated ' + date;
+
+        logFiles.sort(function (a, b) {
+            return b.created - a.created;
+        });
+
+        var logFilesTable = document.getElementById("logFilesTable");
+        for (var i = 0; i < logFiles.length; i++) {
+            var logFile = logFiles[i];
+            date.setTime(logFile.created);
+            var row = logFilesTable.insertRow(-1);
+            var computerNameCell = row.insertCell(0);
+            var pidCell = row.insertCell(1);
+            var typeCell = row.insertCell(2);
+            var dateCell = row.insertCell(3);
+            var logCell = row.insertCell(4);
+            computerNameCell.innerHTML = logFile.computername;
+            pidCell.innerHTML = logFile.pid.toString();
+            typeCell.innerHTML = logFile.type;
+            typeCell.setAttribute('class', logFile.type);
+            dateCell.innerHTML = date.toString();
+            logCell.innerHTML = '<a href="' + logFile.file + '">log</a>';
+        };
+
+    </script>
+</body>
+</html>

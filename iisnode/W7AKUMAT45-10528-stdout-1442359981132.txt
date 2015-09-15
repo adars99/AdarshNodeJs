@@ -1,0 +1,2 @@
+[90mGET /AdarshNodeJs/about [32m200 [90m477ms - 1.3kb[0m
+[90mGET /AdarshNodeJs/contact [32m200 [90m74ms - 1.54kb[0m
